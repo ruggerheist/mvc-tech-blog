@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const postData = await Post.findAll({
       include: [
         {
-          model: User,
+          model: User, 
           attributes: ['email'],
         },
       ],
@@ -49,52 +49,52 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-    try {
-      // Get all Comments and JOIN with user and Posts
-      const commentData = await Comment.findAll({
-        include: [
-          {
-            model: User, Post,
-            attributes: ['email'],
-          },
-        ],
-      });
+// router.get('/', async (req, res) => {
+//     try {
+//       // Get all Comments and JOIN with user and Posts
+//       const commentData = await Comment.findAll({
+//         include: [
+//           {
+//             model: User, Post,
+//             attributes: ['email'],
+//           },
+//         ],
+//       });
   
-      // Serialize data so the template can read it
-      const comments = commentData.map((comment) => comment.get({ plain: true }));
+//       // Serialize data so the template can read it
+//       const comments = commentData.map((comment) => comment.get({ plain: true }));
   
-      // Pass serialized data and session flag into template
-      res.render('homepage', { 
-        comments, 
-        logged_in: req.session.logged_in 
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+//       // Pass serialized data and session flag into template
+//       res.render('homepage', { 
+//         comments, 
+//         logged_in: req.session.logged_in 
+//       });
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
   
-  router.get('/post/:id', async (req, res) => {
-    try {
-      const commentData = await Post.findByPk(req.params.id, {
-        include: [
-          {
-            model: User, Post,
-            attributes: ['email'],
-          },
-        ],
-      });
+//   router.get('/post/:id', async (req, res) => {
+//     try {
+//       const commentData = await Post.findByPk(req.params.id, {
+//         include: [
+//           {
+//             model: User, Post,
+//             attributes: ['email'],
+//           },
+//         ],
+//       });
   
-      const comment = commentData.get({ plain: true });
+//       const comment = commentData.get({ plain: true });
   
-      res.render('comment', {
-        ...comment,
-        logged_in: req.session.logged_in
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+//       res.render('comment', {
+//         ...comment,
+//         logged_in: req.session.logged_in
+//       });
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {

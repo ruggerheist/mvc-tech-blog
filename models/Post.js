@@ -5,12 +5,31 @@ class Post extends Model {}
 
 Post.init(
     {
-        title: DataTypes.STRING,
-        text: DataTypes.STRING
+        id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
     },
-    {
-        sequelize
-    }
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    body: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    date_created: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+    },
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'post',
+} 
 );
 
 module.exports = Post;
