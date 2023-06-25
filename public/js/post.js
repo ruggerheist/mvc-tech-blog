@@ -3,7 +3,7 @@ const newFormHandler = async (event) => {
   
     const title = document.querySelector('#post-title').value.trim();
     const text = document.querySelector('#post-text').value.trim();
-    //const comment = document.querySelector('#post-comment').value.trim();
+    // const comment = document.querySelector('#post-comment').value.trim();
   
     if (title && text) {
       const response = await fetch(`/api/posts`, {
